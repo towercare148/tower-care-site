@@ -5,7 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { buildingTypeOptions, frequencyOptions, serviceOptions } from "@/data/site";
+import { buildingTypeOptions, company, frequencyOptions, serviceOptions } from "@/data/site";
 import { submitQuoteLead, type QuoteLead } from "@/lib/quote-lead";
 import { GoogleBadge } from "./GoogleBadge";
 import { Reveal } from "./Reveal";
@@ -67,6 +67,18 @@ export function QuoteForm() {
           <div className="mt-6">
             <GoogleBadge />
           </div>
+          <div className="mt-8 overflow-hidden rounded-lg border border-border shadow-soft">
+            <iframe
+              title="אזור השירות שלנו"
+              src="https://maps.google.com/maps?q=מודיעין-מכבים-רעות&z=10&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-64 w-full border-0 sm:h-80"
+            />
+          </div>
+          <p className="mt-3 text-xs text-muted-foreground">
+            מודיעין ובסביבה: {company.serviceArea}
+          </p>
         </Reveal>
 
         <Reveal className="rounded-lg border border-border bg-card p-6 shadow-soft sm:p-9">
