@@ -46,15 +46,17 @@ export const serviceCities = [
   "ראשון לציון",
 ] as const;
 
+const companyName = "TOWER CARE";
+
 export const company = {
-  name: "TOWER CARE",
+  name: companyName,
   phone: "050-679-0612",
   whatsapp: "050-679-0612",
   /** Digits only, used for the wa.me link. */
   whatsappNumber: "972506790612",
   email: "towercare148@gmail.com",
   serviceArea: `${serviceCities.slice(0, -1).join(", ")} ו${serviceCities[serviceCities.length - 1]}`,
-  whatsappMessage: "היי, הגעתי דרך האתר ואשמח לקבל הצעת מחיר לניקיון הבניין.",
+  whatsappMessage: `היי, ${companyName}! הגעתי דרך האתר ואשמח לקבל הצעת מחיר פיזית וחינמית לניקיון הבניין שלנו.`,
 } as const;
 
 /** Real Google Business Profile rating — do not change without verifying against the live listing. */
@@ -139,7 +141,7 @@ export const services: { title: string; text: string; icon: LucideIcon }[] = [
   },
   {
     title: "החלפת שקיות זבל",
-    text: "החלפת שקיות בפחי האשפה בבניין, כולל פחי צפרדע, בכל ביקור.",
+    text: "החלפת שקיות בפחי האשפה בבניין בכל ביקור.",
     icon: Boxes,
   },
 ];
@@ -237,6 +239,10 @@ export const faqs = [
   {
     q: "האם ניתן לבנות תכנית ניקיון מותאמת לבניין?",
     a: "כן. אנחנו מגדירים יחד איתכם את המשימות, השטחים והתדירות, ומעלים את התכנית על הכתב כדי שהיא תהיה ברורה לכל הצדדים.",
+  },
+  {
+    q: "האם אתם מספקים את חומרי הניקיון?",
+    a: "כן. אנחנו מגיעים עם כל חומרי וציוד הניקיון וגם עם שקיות האשפה להחלפה – הבניין לא צריך לספק כלום.",
   },
   {
     q: "איך אנחנו יודעים שהניקיון בוצע?",

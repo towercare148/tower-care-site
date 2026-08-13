@@ -30,9 +30,10 @@ function formatLead(lead: QuoteLead): string {
 
 /**
  * Lead delivery with no backend: opens a prefilled WhatsApp chat to the
- * business number, and opens a prefilled mailto as a fallback channel.
+ * business number, and triggers a prefilled mailto as a fallback channel.
  * Both require the visitor to hit "send" on their end — there is no
- * server here to deliver the lead silently.
+ * server here to deliver the lead silently. The caller navigates to the
+ * thank-you page after this resolves.
  */
 export async function submitQuoteLead(lead: QuoteLead): Promise<void> {
   const message = formatLead(lead);
