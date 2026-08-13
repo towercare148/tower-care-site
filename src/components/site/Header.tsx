@@ -25,6 +25,7 @@ export function Header() {
   }, [open]);
 
   return (
+    <>
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
@@ -101,62 +102,64 @@ export function Header() {
           </button>
         </div>
       </div>
+    </header>
 
-      {/* Mobile menu */}
+    {/* Mobile menu — rendered outside <header> so its backdrop-blur doesn't
+        turn this fixed overlay's containing block into the header's own box. */}
+    <div
+      className={cn(
+        "fixed inset-0 z-50 bg-foreground/45 transition-opacity duration-300 lg:hidden",
+        open ? "opacity-100" : "pointer-events-none opacity-0",
+      )}
+      onClick={() => setOpen(false)}
+      aria-hidden={!open}
+    >
       <div
         className={cn(
-          "fixed inset-0 z-50 bg-foreground/45 transition-opacity duration-300 lg:hidden",
-          open ? "opacity-100" : "pointer-events-none opacity-0",
+          "absolute inset-y-0 end-0 flex w-[86%] max-w-sm flex-col bg-background p-6 shadow-lift transition-transform duration-300",
+          open ? "translate-x-0" : "translate-x-full rtl:-translate-x-full",
         )}
-        onClick={() => setOpen(false)}
-        aria-hidden={!open}
+        onClick={(event) => event.stopPropagation()}
       >
-        <div
-          className={cn(
-            "absolute inset-y-0 end-0 flex w-[86%] max-w-sm flex-col bg-background p-6 shadow-lift transition-transform duration-300",
-            open ? "translate-x-0" : "translate-x-full rtl:-translate-x-full",
-          )}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <div className="flex items-center justify-between">
-            <img src={logo} alt={company.name} className="h-8 w-auto" />
-            <button
-              type="button"
+        <div className="flex items-center justify-between">
+          <img src={logo} alt={company.name} className="h-8 w-auto" />
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="סגירת תפריט"
+            className="inline-flex size-10 items-center justify-center rounded-md border border-border"
+          >
+            <X className="size-5" />
+          </button>
+        </div>
+        <nav aria-label="ניווט מובייל" className="mt-8 flex flex-col gap-1">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
               onClick={() => setOpen(false)}
-              aria-label="סגירת תפריט"
-              className="inline-flex size-10 items-center justify-center rounded-md border border-border"
+              className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-secondary"
             >
-              <X className="size-5" />
-            </button>
-          </div>
-          <nav aria-label="ניווט מובייל" className="mt-8 flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-secondary"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <div className="mt-auto flex flex-col gap-3 pt-8">
-            <Button asChild variant="brand" size="xl">
-              <a href="#quote" onClick={() => setOpen(false)}>
-                קבלו הצעת מחיר
-              </a>
-            </Button>
-            <Button asChild variant="quiet" size="xl">
-              <a href={`tel:${company.phone}`}>
-                <Phone className="size-4" />
-                {company.phone}
-              </a>
-            </Button>
-          </div>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <div className="mt-auto flex flex-col gap-3 pt-8">
+          <Button asChild variant="brand" size="xl">
+            <a href="#quote" onClick={() => setOpen(false)}>
+              קבלו הצעת מחיר
+            </a>
+          </Button>
+          <Button asChild variant="quiet" size="xl">
+            <a href={`tel:${company.phone}`}>
+              <Phone className="size-4" />
+              {company.phone}
+            </a>
+          </Button>
         </div>
       </div>
-    </header>
+    </div>
+    </>
   );
 }
 
