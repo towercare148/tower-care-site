@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
-import { Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -27,10 +26,9 @@ const selectClass =
   "h-11 w-full rounded-md border border-input bg-background px-3 text-sm text-foreground transition-colors focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none";
 
 export function QuoteForm() {
-  const navigate = useNavigate();
   const [lead, setLead] = useState<QuoteLead>(emptyLead);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "sending">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
   const update = <K extends keyof QuoteLead>(key: K, value: QuoteLead[K]) =>
     setLead((prev) => ({ ...prev, [key]: value }));
@@ -53,7 +51,7 @@ export function QuoteForm() {
 
     setStatus("sending");
     await submitQuoteLead(lead);
-    navigate({ to: "/thank-you" });
+    setStatus("sent");
   };
 
   return (
@@ -92,6 +90,17 @@ export function QuoteForm() {
         </Reveal>
 
         <Reveal className="rounded-lg border border-border bg-card p-6 shadow-soft sm:p-9">
+          {status === "sent" ? (
+            <div className="flex min-h-80 flex-col items-center justify-center text-center">
+              <CheckCircle2 className="size-12 text-brand" strokeWidth={1.5} aria-hidden="true" />
+              <p
+                role="status"
+                className="mt-6 max-w-md text-lg leading-relaxed font-semibold text-foreground"
+              >
+                תודה! קיבלנו את הפרטים וניצור איתכם קשר בהקדם.
+              </p>
+            </div>
+          ) : (
           <form onSubmit={handleSubmit} noValidate className="grid gap-5 sm:grid-cols-2">
               <Field label="שם מלא" required error={errors['fullName']} htmlFor="fullName">
                 <Input
@@ -222,6 +231,7 @@ export function QuoteForm() {
                 </Button>
               </div>
           </form>
+          )}
         </Reveal>
       </div>
     </section>
