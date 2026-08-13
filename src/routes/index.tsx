@@ -15,7 +15,9 @@ import { Faq } from "@/components/site/Faq";
 import { Footer } from "@/components/site/Footer";
 import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
 import { company, faqs, googleRating, serviceCities } from "@/data/site";
+import heroImage from "@/assets/hero-lobby.jpg";
 
+const siteUrl = "https://towercare.netlify.app";
 const title = `${company.name} | ניקיון בניינים וחדרי מדרגות`;
 const description =
   "שירותי ניקיון מקצועיים לבנייני מגורים, לובי, חדרי מדרגות, מעליות, קומות ושטחים משותפים. תכנית שירות מותאמת לבניין ומענה מקצועי.";
@@ -29,10 +31,12 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "he_IL" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: siteUrl },
+      { property: "og:image", content: `${siteUrl}${heroImage}` },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${siteUrl}${heroImage}` },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: siteUrl }],
     scripts: [
       {
         type: "application/ld+json",
@@ -52,6 +56,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           name: company.name,
+          url: siteUrl,
           telephone: company.phone,
           areaServed: serviceCities.map((city) => ({
             "@type": "City",
