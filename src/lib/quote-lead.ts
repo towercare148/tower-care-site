@@ -1,4 +1,5 @@
 import { company } from "@/data/site";
+import { sendLeadEmail } from "./send-lead-email";
 
 export type QuoteLead = {
   fullName: string;
@@ -29,11 +30,11 @@ function formatLead(lead: QuoteLead): string {
 }
 
 /**
- * Lead delivery with no backend: opens a prefilled WhatsApp chat to the
- * business number, and triggers a prefilled mailto as a fallback channel.
- * Both require the visitor to hit "send" on their end — there is no
- * server here to deliver the lead silently. The caller navigates to the
- * thank-you page after this resolves.
+ * Lead delivery: the email is sent automatically and silently via a
+ * server function (Resend) — no action needed from the visitor. The
+ * WhatsApp chat still opens so the visitor can message the business
+ * directly if they want to; that part still requires them to hit send.
+ * The caller navigates to the thank-you page after this resolves.
  */
 export async function submitQuoteLead(lead: QuoteLead): Promise<void> {
   const message = formatLead(lead);
@@ -41,7 +42,5 @@ export async function submitQuoteLead(lead: QuoteLead): Promise<void> {
   const whatsappUrl = `https://wa.me/${company.whatsappNumber}?text=${encodeURIComponent(message)}`;
   window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
-  const mailSubject = encodeURIComponent(`בקשת הצעת מחיר - ${lead.fullName}`);
-  const mailBody = encodeURIComponent(message);
-  window.location.href = `mailto:${company.email}?subject=${mailSubject}&body=${mailBody}`;
+  await sendLeadEmail({ data: lead });
 }
