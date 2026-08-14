@@ -67,26 +67,6 @@ export function QuoteForm() {
           <div className="mt-6">
             <GoogleBadge />
           </div>
-          <div className="mt-8 overflow-hidden rounded-lg border border-border shadow-soft">
-            <iframe
-              title="אזור השירות שלנו"
-              src="https://maps.google.com/maps?q=מודיעין-מכבים-רעות&z=10&hl=iw&output=embed"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-64 w-full border-0 sm:h-80"
-            />
-          </div>
-          <div className="mt-5">
-            <p className="text-sm font-semibold text-foreground">אזורי השירות שלנו</p>
-            <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-3">
-              {serviceCities.map((city) => (
-                <li key={city} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="size-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
-                  {city}
-                </li>
-              ))}
-            </ul>
-          </div>
         </Reveal>
 
         <Reveal className="rounded-lg border border-border bg-card p-6 shadow-soft sm:p-9">
@@ -232,6 +212,29 @@ export function QuoteForm() {
               </div>
           </form>
           )}
+        </Reveal>
+
+        <Reveal className="lg:col-start-2">
+          <div className="overflow-hidden rounded-lg border border-border shadow-soft">
+            <iframe
+              title="אזור השירות שלנו"
+              src="https://maps.google.com/maps?q=מודיעין-מכבים-רעות&z=10&hl=iw&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-64 w-full border-0 sm:h-80"
+            />
+          </div>
+          <div className="mt-5">
+            <p className="text-sm font-semibold text-foreground">אזורי השירות שלנו</p>
+            <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-3">
+              {serviceCities.map((city) => (
+                <li key={city} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span className="size-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+                  {city}
+                </li>
+              ))}
+            </ul>
+          </div>
         </Reveal>
       </div>
     </section>
