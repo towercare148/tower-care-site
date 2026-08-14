@@ -56,6 +56,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           name: company.name,
+          alternateName: "ניקיון חדרי מדרגות במודיעין והסביבה",
           url: siteUrl,
           telephone: company.phone,
           areaServed: serviceCities.map((city) => ({
@@ -68,6 +69,15 @@ export const Route = createFileRoute("/")({
             reviewCount: googleRating.reviewCount,
           },
           sameAs: [googleRating.profileUrl],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: company.name,
+          url: siteUrl,
         }),
       },
     ],
