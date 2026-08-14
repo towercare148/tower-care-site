@@ -57,7 +57,7 @@ export function QuoteForm() {
   return (
     <section id="quote" className="bg-surface py-20 md:py-28">
       <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-16">
-        <Reveal>
+        <Reveal className="lg:col-start-1 lg:row-start-1">
           <p className="mb-4 text-xs font-semibold tracking-[0.22em] text-brand">צור קשר</p>
           <h2 className="text-3xl leading-tight font-bold sm:text-4xl">בואו נכיר את הבניין</h2>
           <p className="mt-5 text-base leading-relaxed text-muted-foreground">
@@ -69,7 +69,7 @@ export function QuoteForm() {
           </div>
         </Reveal>
 
-        <Reveal className="rounded-lg border border-border bg-card p-6 shadow-soft sm:p-9">
+        <Reveal className="rounded-lg border border-border bg-card p-6 shadow-soft sm:p-9 lg:col-start-2 lg:row-start-1 lg:row-span-2">
           {status === "sent" ? (
             <div className="flex min-h-80 flex-col items-center justify-center text-center">
               <CheckCircle2 className="size-12 text-brand" strokeWidth={1.5} aria-hidden="true" />
@@ -214,7 +214,7 @@ export function QuoteForm() {
           )}
         </Reveal>
 
-        <Reveal className="lg:col-start-2">
+        <Reveal className="lg:col-start-1 lg:row-start-2">
           <div className="overflow-hidden rounded-lg border border-border shadow-soft">
             <iframe
               title="אזור השירות שלנו"
